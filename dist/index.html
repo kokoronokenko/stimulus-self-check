@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="日常生活で負担を感じやすい場面と、自分に合った整え方を考えるための独自セルフチェック">
+  <title>刺激の受け取り方・セルフチェック</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div><p class="eyebrow">匿名・保存なし</p><p class="brand">刺激の受け取り方・セルフチェック</p></div>
+    <button id="exitButton" class="text-button" type="button" hidden>終了する</button>
+  </header>
+
+  <main id="app" class="app-shell" aria-live="polite">
+    <section id="introView" class="view intro-view">
+      <div class="intro-grid">
+        <div>
+          <p class="pill">刺激の受け取りからセルフチェック</p>
+          <h1>気づくことから、<br><span>自分に合う整え方</span>を。</h1>
+          <p class="lead">日常の刺激や情報、人との関わりによる負担と、今使えている回復方法を20の質問で振り返ります。</p>
+        </div>
+        <div class="orbit-card" aria-label="4つの振り返り領域">
+          <div class="orbit-center">20問<br><small>約5分</small></div>
+          <span class="orbit-item item-a">感覚環境</span>
+          <span class="orbit-item item-b">情報・課題</span>
+          <span class="orbit-item item-c">対人・感情</span>
+          <span class="orbit-item item-d">回復資源</span>
+        </div>
+      </div>
+
+      <div class="notice-card">
+        <h2>はじめにご確認ください</h2>
+        <p>このチェックは、日常生活で負担を感じやすい場面と、自分に合った整え方を考えるために独自に作成したものです。標準化された心理尺度ではなく、HSPや精神疾患、健康状態を診断・判定するものではありません。</p>
+        <p>個人情報は入力しません。回答と結果は保存・送信されず、この画面上だけで処理されます。</p>
+        <label class="consent"><input id="consent" type="checkbox"><span>目的と、回答・結果が保存されないことを確認しました</span></label>
+        <button id="startButton" class="primary-button" type="button" disabled>チェックを始める <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section id="questionView" class="view" hidden>
+      <div class="progress-wrap">
+        <div class="progress-meta"><span id="stepLabel">1 / 4</span><span id="answerCount">0 / 20 回答</span></div>
+        <div class="progress-track" role="progressbar" aria-label="回答の進み具合" aria-valuemin="0" aria-valuemax="20"><div id="progressBar"></div></div>
+      </div>
+      <div class="section-heading"><p id="sectionKicker" class="eyebrow"></p><h1 id="sectionTitle"></h1><p id="sectionDescription"></p></div>
+      <div id="questionList" class="question-list"></div>
+      <p id="formError" class="form-error" role="alert" hidden>未回答の項目があります。回答を選んでください。</p>
+      <div class="navigation"><button id="backButton" class="secondary-button" type="button">戻る</button><button id="nextButton" class="primary-button" type="button">次へ <span aria-hidden="true">→</span></button></div>
+    </section>
+
+    <section id="resultView" class="view" hidden>
+      <div class="result-hero"><p class="pill">今回の振り返り結果</p><h1>自分に合う整え方を<br>見つける手がかりに</h1><p>この結果は、回答時点の傾向を整理した参考情報です。HSPや精神疾患を診断するものではありません。</p></div>
+      <div id="scoreCards" class="score-grid"></div>
+      <p class="meter-note">各メーターは、本ツールの得点範囲における位置を見やすく示したものです。標準化された心理尺度の得点、HSPである確率、医学的重症度、精神疾患の発症確率を表すものではありません。</p>
+      <section class="advice-card"><p class="eyebrow">回答から見つけたヒント</p><h2>今の自分を守るために</h2><div id="adviceList"></div></section>
+      <section class="reflection-card"><h2>少し立ち止まって考えてみましょう</h2><ul><li>最近、負担を感じやすかった場所や時間帯はありますか</li><li>環境や予定を少し調整できるとしたら、何を変えたいですか</li><li>自分を落ち着かせるために、すでに役立っていることは何ですか</li><li>困ったときに状況を伝えられる人はいますか</li></ul></section>
+      <section class="support-card"><h2>つらさが続いているときは</h2><p>強い不安、不眠、落ち込み、生活上の支障が続く場合は、この結果だけで説明しようとせず、身近な相談窓口や医療機関へご相談ください。自分や他者の安全を保てないと感じる場合は、このチェックを待たず緊急の相談先を利用してください。</p><a class="support-link" href="https://kokoro.mhlw.go.jp/" target="_blank" rel="noopener noreferrer">厚生労働省「こころの耳」を確認する <span aria-hidden="true">↗</span></a></section>
+      <div class="result-actions"><button id="restartButton" class="secondary-button" type="button">最初からやり直す</button><button id="closeButton" class="primary-button" type="button">結果を閉じる</button></div>
+      <p class="version">独自セルフチェック｜版 ORIGINAL-REFLECTION-1.0</p>
+    </section>
+  </main>
+
+  <dialog id="confirmDialog">
+    <form method="dialog"><h2>回答を消去しますか？</h2><p>回答内容と結果は保存されません。終了してよろしいですか。</p><div class="dialog-actions"><button value="cancel" class="secondary-button">戻る</button><button id="confirmExit" value="confirm" class="danger-button">消去して終了</button></div></form>
+  </dialog>
+
+  <footer><p>本ツールは既存の心理尺度を転載・翻案したものではありません。</p></footer>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
